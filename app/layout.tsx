@@ -21,7 +21,7 @@ export default function RootLayout ({
     <html lang='en'>
       <body className={`${mainFont.className} `}>
         <StickyHeader />
-        <section className='container mx-auto flex py-2'>{children}</section>
+        <section className='container mx-auto flex py-2 px-4'>{children}</section>
       </body>
     </html>
   )
