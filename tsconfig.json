@@ -22,6 +22,7 @@
     "paths": {
       "@components": ["components/index.ts"],
       "@views": ["views/index.ts"],
+      "@types": ["types/index.ts"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
