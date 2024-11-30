@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Lato, Poppins } from 'next/font/google'
 import './globals.css'
 import { StickyHeader } from '@components'
 
@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   description: 'Gold Online Shop'
 }
 
-const mainFont = Poppins({
-  weight: ['300', '400', '500', '600', '700', '800', '900']
+const mainFont = Lato({
+  weight: ['100', '300', '400', '700', '900']
 })
 
 export default function RootLayout ({
@@ -21,7 +21,9 @@ export default function RootLayout ({
     <html lang='en'>
       <body className={`${mainFont.className} `}>
         <StickyHeader />
-        <section className='container mx-auto flex py-2 px-4'>{children}</section>
+        <section className='container mx-auto flex py-2 px-4'>
+          {children}
+        </section>
       </body>
     </html>
   )
