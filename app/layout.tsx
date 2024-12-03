@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Lato, Poppins } from 'next/font/google'
 import './globals.css'
 import { StickyHeader } from '@components'
+import { ClientLayout } from 'ClientLayout'
 
 export const metadata: Metadata = {
   title: 'Gold App',
@@ -20,10 +21,12 @@ export default function RootLayout ({
   return (
     <html lang='en'>
       <body className={`${mainFont.className} `}>
-        <StickyHeader />
-        <section className='container mx-auto flex py-2 px-4'>
-          {children}
-        </section>
+        <ClientLayout>
+          <StickyHeader />
+          <section className='container mx-auto flex py-2 px-4'>
+            {children}
+          </section>
+        </ClientLayout>
       </body>
     </html>
   )
