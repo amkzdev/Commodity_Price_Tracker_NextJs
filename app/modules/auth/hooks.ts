@@ -37,3 +37,20 @@ export const useMutateVerify = () => {
         }
     })
 }
+
+
+export const useMutateLogin = () => {
+
+
+    return useCustomMutation<AuthEndpointsType['LOGIN']>({
+        mutationFn: (data) => api.post(authEndpoints.LOGIN, data),
+        mutationKey: ['Login'],
+        onError: (errData) => {
+            alert(errData.response?.data.detail)
+        },
+        onSuccess: () => {
+            alert('You Have Successfully Logged in')
+
+        }
+    })
+}

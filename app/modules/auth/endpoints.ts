@@ -1,14 +1,16 @@
 import { ApiMutateRequestType } from "@types"
-import { SignupRequestBody } from "./schema.type"
+import { LoginRequestBody, SignupRequestBody } from "./schema.type"
 
 export const authEndpoints = {
     SIGNUP: `/api/register`,
     VERIFY: "/api/activate",
+    LOGIN:'/api/authenticate'
 
 }
 
 
 export interface AuthEndpointsType {
     SIGNUP: ApiMutateRequestType<SignupRequestBody>,
-    VERIFY: ApiMutateRequestType<{ key: string }>
+    VERIFY: ApiMutateRequestType<{ key: string }>,
+    LOGIN:ApiMutateRequestType<LoginRequestBody>
 }

@@ -5,6 +5,12 @@ export interface SignupRequestBody {
     login?: string
 }
 
-export interface VerifyRequestBody { 
-    key:string
- }
+export interface VerifyRequestBody {
+    key: string
+}
+
+export interface LoginRequestBody {
+    username: string,
+    password: string,
+    rememberMe: boolean
+}

@@ -84,6 +84,7 @@ export const Form = () => {
         placeholder='Create Password'
         error={!!errors.password}
         errorText={errors.password?.message}
+        type='password'
       />
 
       <Input
@@ -92,6 +93,7 @@ export const Form = () => {
           required: { value: true, message: 'Confirm Password Is Required' }
         })}
         placeholder='Confirm Password'
+        type='password'
         error={!!errors.rePassword}
         errorText={errors.rePassword?.message}
       />
