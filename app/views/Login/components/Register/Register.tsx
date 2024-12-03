@@ -1,7 +1,12 @@
+'use client'
 import React from 'react'
 import { Form } from './components/Form/Form'
+import { useSignUp } from '../hooks'
+import { Verify } from './components/Verify/Verify'
 
 export const Register = () => {
+  const { step } = useSignUp()
+
   return (
     <div className='flex flex-col gap-4'>
       <div className='flex flex-col gap-1.5 items-start'>
@@ -11,7 +16,8 @@ export const Register = () => {
         </span>
       </div>
 
-      <Form />
+      {step == 1 && <Form />}
+      {step == 2 && <Verify />}
     </div>
   )
 }

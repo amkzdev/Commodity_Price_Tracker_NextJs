@@ -6,10 +6,13 @@ interface DataType {
 }
 
 interface StoreType extends DataType {
-    setStep: (step: number) => void
+    setStep: (step: number) => void,
+    email?:string,
+    dispatch:(data:DataType)=>void
 }
 export const useSignUp = create<StoreType>((set) => ({
     step: 1,
     setStep: (step) => set((state) => ({ step })),
+    dispatch: (newData) => set((state) => ({ ...state , ...newData })),
 }))
 

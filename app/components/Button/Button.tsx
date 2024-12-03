@@ -45,8 +45,7 @@ export const Button = ({ size = 'fit', variant = 'primary', iconSide = 'right', 
 
             {...props} disabled={props.disabled ?? loading} >
             {!loading && LeftIcon && <LeftIcon className={clsx('size-4', iconColorFn(leftIconColor) )} />}
-            {children}
-            {/* {loading ? <Spinner/> : children} */}
+            {loading ? <span className='text-sm'>Loading...</span> : children}
             {!loading && RightIcon && <RightIcon className={clsx('size-4', iconColorFn(rightIconColor) )} />}
         </button>
 
