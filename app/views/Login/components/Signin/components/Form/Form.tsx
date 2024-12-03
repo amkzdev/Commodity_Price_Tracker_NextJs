@@ -66,7 +66,7 @@ export const Form = () => {
           Login
         </Button>
 
-        <Link href={'/forgot-password'}>Forgotten Password?</Link>
+        {/* <Link href={'/forgot-password'}>Forgotten Password?</Link> */}
       </div>
     </form>
   )
