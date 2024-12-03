@@ -11,9 +11,9 @@ export const Register = () => {
     <div className='flex flex-col gap-4'>
       <div className='flex flex-col gap-1.5 items-start'>
         <span className='text-xl font-semibold'>Register</span>
-        <span className='text-gray-500'>
+        {step==1 && <span className='text-gray-500'>
           Complete the form below to create an account here{' '}
-        </span>
+        </span>}
       </div>
 
       {step == 1 && <Form />}

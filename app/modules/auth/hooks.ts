@@ -19,3 +19,21 @@ export const useMutateSignup = () => {
         }
     })
 }
+
+export const useMutateVerify = () => {
+
+    const { dispatch } = useSignUp()
+
+    return useCustomMutation<AuthEndpointsType['VERIFY']>({
+        mutationFn: (data) => api.get(authEndpoints.VERIFY, {params:data}),
+        mutationKey: ['Verify-Code'],
+        onError: (errData) => {
+            alert(errData.response?.data.detail)
+        },
+        onSuccess: ({ }, {key }) => {
+            alert('Account Successfully Verified.Now You Can Login')
+            dispatch({step:1})
+
+        }
+    })
+}

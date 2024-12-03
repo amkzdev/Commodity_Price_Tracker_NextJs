@@ -1,6 +1,6 @@
-export type { SignupRequestBody } from './schema.type'
+export type { SignupRequestBody  , VerifyRequestBody} from './schema.type'
 export type { AuthEndpointsType } from './endpoints'
 
 export { authEndpoints } from './endpoints'
 
-export { useMutateSignup } from './hooks'
+export { useMutateSignup , useMutateVerify} from './hooks'

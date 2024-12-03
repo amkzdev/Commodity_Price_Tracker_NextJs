@@ -4,3 +4,7 @@ export interface SignupRequestBody {
     email: string,
     login?: string
 }
+
+export interface VerifyRequestBody { 
+    key:string
+ }
