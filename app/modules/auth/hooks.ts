@@ -2,6 +2,8 @@ import { api } from "_api";
 import { useCustomMutation } from "hooks";
 import { authEndpoints, AuthEndpointsType } from "./endpoints";
 import { useSignUp } from "views/Login/components/hooks";
+import { setCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 export const useMutateSignup = () => {
 
@@ -25,14 +27,14 @@ export const useMutateVerify = () => {
     const { dispatch } = useSignUp()
 
     return useCustomMutation<AuthEndpointsType['VERIFY']>({
-        mutationFn: (data) => api.get(authEndpoints.VERIFY, {params:data}),
+        mutationFn: (data) => api.get(authEndpoints.VERIFY, { params: data }),
         mutationKey: ['Verify-Code'],
         onError: (errData) => {
             alert(errData.response?.data.detail)
         },
-        onSuccess: ({ }, {key }) => {
+        onSuccess: ({ }, { key }) => {
             alert('Account Successfully Verified.Now You Can Login')
-            dispatch({step:1})
+            dispatch({ step: 1 })
 
         }
     })
@@ -41,6 +43,8 @@ export const useMutateVerify = () => {
 
 export const useMutateLogin = () => {
 
+    const router = useRouter()
+
 
     return useCustomMutation<AuthEndpointsType['LOGIN']>({
         mutationFn: (data) => api.post(authEndpoints.LOGIN, data),
@@ -48,7 +52,9 @@ export const useMutateLogin = () => {
         onError: (errData) => {
             alert(errData.response?.data.detail)
         },
-        onSuccess: () => {
+        onSuccess: ({ data: { id_token } }) => {
+            setCookie('access_token', id_token, { maxAge: 60 * 60 * 24 })
+            router.push('/dashboard')
             alert('You Have Successfully Logged in')
 
         }

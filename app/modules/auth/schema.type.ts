@@ -2,7 +2,8 @@ export interface SignupRequestBody {
     password: string
     username: string,
     email: string,
-    login?: string
+    login?: string,
+    langKey: 'en'
 }
 
 export interface VerifyRequestBody {
@@ -13,4 +14,8 @@ export interface LoginRequestBody {
     username: string,
     password: string,
     rememberMe: boolean
+}
+
+export interface LoginSuccessResponse {
+    id_token: string
 }
