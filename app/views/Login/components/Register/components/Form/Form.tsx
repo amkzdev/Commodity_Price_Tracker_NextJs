@@ -45,7 +45,7 @@ export const Form = () => {
       })
     }
 
-    mutate({ email, password, username, login: username })
+    mutate({ email, password, username, login: username  , langKey:'en'})
 
   }
 

@@ -20,14 +20,14 @@ export const Verify = () => {
 
   return (
     <div className='flex flex-col gap-4'>
-      <div className='flex flex-col gap-1.5 items-start'>
+      <div className='flex flex-col gap-1.5 items-start bg-gray-50 rounded-md border  p-4'>
         {/* <span className='text-xl font-semibold'>Enter Code</span> */}
         <span className='text-gray-500'>
-          We Send Code To Your Email {email}
+          We Send Activation Link To Your Email {email} .<br/> Click On The Link To Activte Your Account.
         </span>
       </div>
 
-      <form
+      {/* <form
         onSubmit={handleSubmit(handleSend)}
         className='bg-gray-50 rounded-md border flex flex-col gap-6 p-4 py-6'
       >
@@ -51,7 +51,7 @@ export const Verify = () => {
         >
           Verify
         </Button>
-      </form>
+      </form> */}
     </div>
   )
 }
