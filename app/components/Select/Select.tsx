@@ -11,7 +11,7 @@ export const Select = <VT,>({ icon: Icon, items, onSelectAction, value, title }:
     const selectedItem = items.find(i => i.value == value)
 
     return (
-        <div className='flex flex-col gap-2.5 flex-1 '>
+        <div className='flex flex-col gap-2.5 flex-1 z-50'>
             {!!title && <div className='flex flex-row gap-1.5 items-center'>
                 {!!Icon && <Icon className='size-5' />}
                 <span className='font-semibold text-base'>{title}</span>
@@ -22,7 +22,7 @@ export const Select = <VT,>({ icon: Icon, items, onSelectAction, value, title }:
                     {selectedItem?.title}
                     <ChevronDownIcon className='size-2  ' />
                 </span>
-                <div className={clsx('absolute left-0 top-full  transition-all shadow rounded border w-full', isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none')}>
+                <div className={clsx('absolute left-0 top-full  transition-all shadow rounded border w-full z-20', isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none')}>
                     {items.map(item => <div
                         onClick={() => { onSelectAction(item.value); setIsOpen(false) }}
                         className={clsx('p-2 hover:bg-gray-50 hover:text-black cursor-pointer',
