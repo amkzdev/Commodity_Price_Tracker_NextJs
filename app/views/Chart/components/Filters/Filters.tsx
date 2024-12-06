@@ -1,18 +1,19 @@
 'use client'
 import React from 'react'
 import { ButtonFilter } from './components'
-import { CurrencyType, PeriodType } from '@staticData'
+import { CommodityType, CurrencyType, PeriodType, WeightType } from '@staticData'
 import { FilterType, useChartFilter } from 'views/Chart/hooks'
-import { CalendarDateRangeIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline'
+import { CalendarDateRangeIcon, CircleStackIcon, CurrencyDollarIcon } from '@heroicons/react/24/outline'
+import { Select } from '@components'
 
 export const Filters = () => {
 
-  const { dispatch, period , currency } = useChartFilter()
+  const { dispatch, period, currency, commodity, weight } = useChartFilter()
 
   return (
-    <div className='grid grid-cols-4 gap-4 text-sm'>
+    <div className='grid  grid-cols-2 lg:grid-cols-9 gap-4 text-sm w-full '>
 
-      <div className='col-span-1'>
+      <div className='col-span-2 lg:col-span-4  xl:col-span-3 flex'>
 
 
         <ButtonFilter
@@ -32,7 +33,7 @@ export const Filters = () => {
         />
       </div>
 
-      <div className='col-span-1'>
+      <div className='col-span-2  lg:col-span-2 flex'>
         <ButtonFilter
           <CurrencyType>
           icon={CurrencyDollarIcon}
@@ -45,6 +46,37 @@ export const Filters = () => {
           ]}
           onChange={(item) => dispatch({ currency: item })}
           value={currency}
+        />
+      </div>
+
+      <div className='col-span-1'>
+        <Select
+          <CommodityType>
+          items={[
+            { title: 'Gold', value: 'gold' },
+            { title: 'Silver', value: 'silver' },
+            { title: 'Platinum', value: 'platinum' },
+            { title: 'Palladium', value: 'palladium' },
+          ]}
+          onSelectAction={(item) => dispatch({ commodity: item })}
+          value={commodity}
+          icon={CircleStackIcon}
+          title='Commodity'
+        />
+      </div>
+
+      <div className='col-span-1'>
+        <Select
+          <WeightType>
+          items={[
+            { title: 'Grams', value: 'grams' },
+            { title: 'Ounces', value: 'ounces' },
+            { title: 'Kilograms', value: 'kilograms' },
+          ]}
+          onSelectAction={(item) => dispatch({ weight: item })}
+          value={weight}
+          icon={CircleStackIcon}
+          title='Weight'
         />
       </div>
 

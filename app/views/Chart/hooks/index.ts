@@ -10,11 +10,14 @@ export interface FilterType {
 }
 
 interface StoreType extends FilterType {
-
     dispatch:(data:Partial<FilterType>)=>void
 }
 
 export const useChartFilter = create<StoreType>((set) => ({
+    commodity:'gold',
+    weight:'ounces',
+    currency:'British Pounds',
+    period:'today',
     dispatch: (newData) => set((state) => ({ ...state , ...newData })),
 }))
 
