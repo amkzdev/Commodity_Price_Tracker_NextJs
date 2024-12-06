@@ -5,8 +5,8 @@ import clsx from 'clsx'
 export const ButtonFilter = <T,>({ items, icon: Icon, title, onChange, value }: types<T>) => {
 
   return (
-    <div className='flex flex-col gap-2.5'>
-      <div className='flex flex-row gap-2 items-center'>
+    <div className='flex flex-col gap-2.5 flex-1 '>
+      <div className='flex flex-row gap-1.5 items-center'>
         <Icon className='size-5' />
         <span className='font-semibold text-base'>{title}</span>
       </div>
