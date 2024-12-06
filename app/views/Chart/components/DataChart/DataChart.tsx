@@ -6,24 +6,24 @@ import HighchartsReact from 'highcharts-react-official'
 import { Spinner } from '@components'
 import { useChartFilter } from 'views/Chart/hooks'
 import { CommodityType, PeriodType } from '@staticData'
+import moment from 'moment'
 
 
 const renderLabel = (date: string, period?: PeriodType) => {
     if (period == 'today' || period == 'live')
-        return (new Date(date)).toLocaleTimeString()
-    else return (new Date(date)).toDateString()
+        return moment(date).format('HH:mm')
+    else return moment(date).format('DD/MM/YYYY')
 }
 
 
-const generateChartColor = (commodity?:CommodityType) =>{
+const generateChartColor = (commodity?: CommodityType) => {
 
-    switch(commodity)
-    {
-        case 'gold' :return '#eaddc6'
-        case 'palladium':return '#f7f7f7'
-        case 'silver' :return '#aaaaaa'
-        case 'platinum' :return '#888888'
-        default :return  '#eaddc6'
+    switch (commodity) {
+        case 'gold': return '#eaddc6'
+        case 'palladium': return '#f7f7f7'
+        case 'silver': return '#aaaaaa'
+        case 'platinum': return '#bfbfbf'
+        default: return '#eaddc6'
     }
 }
 
@@ -46,40 +46,57 @@ export const DataChart = () => {
         legend: {
             enabled: false
         },
-        // plotOptions: {
-        //     area: {
-        //       pointStart: 20000,
-        //       marker: {
-        //         enabled: false,
-        //         symbol: 'circle',
-        //         radius: 2,
-        //         states: {
-        //           hover: {
-        //             enabled: true
-        //           }
-        //         }
-        //       }
-        //     }
-        //   },
+        plotOptions: {
+            series: {
+                fillOpacity: 0.5
+            }
+            // area: {
+            //   pointStart: 20000,
+            //   marker: {
+            //     enabled: false,
+            //     symbol: 'circle',
+            //     radius: 2,
+            //     states: {
+            //       hover: {
+            //         enabled: true
+            //       }
+            //     }
+            //   }
+            // }
+          },
         xAxis: {
-            categories: data?.data.filter((i, index) => index % 2000 == 0).map((i) => renderLabel(i.time, period)),
-            gridLineWidth: 1
+            categories: data?.data.filter((i, index) => index % 1000 == 0).map((i, index, arr) => renderLabel(i.time, period)),
+            gridLineWidth: 1,
+            tickAmount: 8,
+            allowTicks: true,
+            breakSize:2000,
+            gridLineColor:'rgba(0, 0, 0, 0.1)',
+            tickInterval:7,
+            labels:{
+                offset:10
+            }
 
         },
         yAxis: {
             labels: { align: 'right', title: undefined },
-            title:false,
-            align:'right'
+            opposite: true,
+            align: 'right',
+            offset: 10,
+            gridLineWidth: 1,
+            allowOverlap: true,
+            formatter: (f: any, t: string) => `${t}$`,
+            title: false
         },
         series: [{
             name: commodity,
             // data: data?.data.map(i => ({y:i.value  , x:i.time.split('T')[0]}))
-            data: data?.data.filter((i, index) => index % 2000 == 0).map(i => i.value),
-            color: generateChartColor(commodity)
+            data: data?.data.filter((i, index) => index % 1000 == 0).map(i => i.value),
+            color: generateChartColor(commodity),
+
         }]
     }
 
-    console.log(data?.data.filter((i, index) => index % 2000 == 0).map(i => i.value))
+    console.log(data?.data.filter((i, index) => index % 1000 == 0).map(i => i.value))
 
     if (data)
         return (
