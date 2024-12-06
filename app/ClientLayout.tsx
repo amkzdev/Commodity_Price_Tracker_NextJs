@@ -9,7 +9,7 @@ const queryClient = new QueryClient({
     queries:
     {
       refetchOnMount: false,
-      refetchOnReconnect: false
+      refetchOnWindowFocus: false
     }
   }
 })
