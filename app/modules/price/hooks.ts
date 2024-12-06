@@ -57,7 +57,8 @@ export const useChartData = () => {
 
             return api.get(priceEndpoints.GET_PRICES, { params: { measurement: createMeasurment(queryKey[1]), from: createFromParam(queryKey[2]) , unit:'GRAM' } })
         },
-        queryKey: ['GET-PRICES', commodity, period]
+        queryKey: ['GET-PRICES', commodity, period],
+        refetchInterval:1000 * 60,
     })
 
 }

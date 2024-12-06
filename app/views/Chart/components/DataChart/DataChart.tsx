@@ -5,7 +5,7 @@ import Highcharts from 'highcharts/highstock'
 import HighchartsReact from 'highcharts-react-official'
 import { Spinner } from '@components'
 import { useChartFilter } from 'views/Chart/hooks'
-import { CommodityType, PeriodType } from '@staticData'
+import { CommodityType, CurrencyType, PeriodType } from '@staticData'
 import moment from 'moment'
 
 
@@ -27,17 +27,27 @@ const generateChartColor = (commodity?: CommodityType) => {
     }
 }
 
+const generateYLabel = (currency?: CurrencyType) => {
+    if (currency == 'US Dollar')
+        return '${text}'
+    else if (currency == 'British Pounds')
+        return '£{text}'
+    else if (currency == 'Euro')
+        return '€{text}'
+    return '${text}'
+}
+
 
 export const DataChart = () => {
 
     const { data, isLoading } = useChartData()
 
 
-    const { commodity, period } = useChartFilter()
+    const { commodity, period, currency } = useChartFilter()
 
     const options = {
         style: {
-            height: '100%',
+            height: '40vh',
         },
         chart: {
             type: 'area'
@@ -63,32 +73,42 @@ export const DataChart = () => {
             //     }
             //   }
             // }
-          },
+        },
+
+        tooltip: {
+            crosshairs:true,
+            pointFormat:` ${commodity?.substring(0, 1).toLocaleUpperCase().concat(commodity.substring(1))} Price  <br/> <b>{point.y}${generateYLabel(currency)}</b> `
+            // pointFormat: '{series.name}  <b>{point.y:,.0f}</b><br/>' +
+            //     ' {point.x}'
+        },
         xAxis: {
             categories: data?.data.filter((i, index) => index % 1000 == 0).map((i, index, arr) => renderLabel(i.time, period)),
             gridLineWidth: 1,
             tickAmount: 8,
             allowTicks: true,
-            breakSize:2000,
-            gridLineColor:'rgba(0, 0, 0, 0.1)',
-            tickInterval:7,
-            labels:{
-                offset:10
-            }
+            breakSize: 2000,
+            gridLineColor: 'rgba(0, 0, 0, 0.1)',
+            tickInterval: 7,
+            labels: {
+                offset: 10
+            },
+            crosshair:true
 
         },
         yAxis: {
-            labels: { align: 'right', title: undefined },
+            labels: { align: 'right', title: undefined ,format: generateYLabel(currency) },
             opposite: true,
             align: 'right',
             offset: 10,
             gridLineWidth: 1,
             allowOverlap: true,
             formatter: (f: any, t: string) => `${t}$`,
-            title: false
+            title: false,
+            // crosshair:true
+            // label: { format: generateYLabel(currency) }
         },
         series: [{
-            name: commodity,
+            name: `${commodity?.substring(0, 1).toLocaleUpperCase().concat(commodity.substring(1))} Price`,
             // data: data?.data.map(i => ({y:i.value  , x:i.time.split('T')[0]}))
             data: data?.data.filter((i, index) => index % 1000 == 0).map(i => i.value),
             color: generateChartColor(commodity),
@@ -96,11 +116,11 @@ export const DataChart = () => {
         }]
     }
 
-    console.log(data?.data.filter((i, index) => index % 1000 == 0).map(i => i.value))
+    // console.log(data?.data.filter((i, index) => index % 1000 == 0).map(i => i.value))
 
     if (data)
         return (
-            <div className='w-full aspect-video' >
+            <div className='w-full ' >
 
                 <HighchartsReact
                     highcharts={Highcharts}
