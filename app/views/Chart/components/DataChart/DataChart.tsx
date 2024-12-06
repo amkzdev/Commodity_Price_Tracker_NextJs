@@ -44,7 +44,7 @@ export const DataChart = () => {
         },
         title: undefined,
         legend: {
-            enabled: true
+            enabled: false
         },
         // plotOptions: {
         //     area: {
