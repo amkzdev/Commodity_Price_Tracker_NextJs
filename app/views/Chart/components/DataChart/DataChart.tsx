@@ -47,10 +47,12 @@ export const DataChart = () => {
 
     const options = {
         style: {
-            height: '40vh',
         },
         chart: {
-            type: 'area'
+            type: 'area',
+            height: '400px',
+            id: '#chart',
+            spacingRight: 25,
         },
         title: undefined,
         legend: {
@@ -76,8 +78,8 @@ export const DataChart = () => {
         },
 
         tooltip: {
-            crosshairs:true,
-            pointFormat:` ${commodity?.substring(0, 1).toLocaleUpperCase().concat(commodity.substring(1))} Price  <br/> <b>{point.y}${generateYLabel(currency)}</b> `
+            crosshairs: true,
+            pointFormat: ` ${commodity?.substring(0, 1).toLocaleUpperCase().concat(commodity.substring(1))} Price  <br/> <b>{point.y}${generateYLabel(currency)}</b> `
             // pointFormat: '{series.name}  <b>{point.y:,.0f}</b><br/>' +
             //     ' {point.x}'
         },
@@ -92,11 +94,11 @@ export const DataChart = () => {
             labels: {
                 offset: 10
             },
-            crosshair:true
+            crosshair: true
 
         },
         yAxis: {
-            labels: { align: 'right', title: undefined ,format: generateYLabel(currency) },
+            labels: { align: 'right', title: undefined, format: generateYLabel(currency), style: { fontSize: '10px', color: '#212529' } },
             opposite: true,
             align: 'right',
             offset: 10,
@@ -118,19 +120,20 @@ export const DataChart = () => {
 
     // console.log(data?.data.filter((i, index) => index % 1000 == 0).map(i => i.value))
 
-    if (data)
+    if (data )
         return (
-            <div className='w-full ' >
+            <div className='w-full relative' style={{ height: '100px' }}>
 
                 <HighchartsReact
                     highcharts={Highcharts}
                     // constructorType={'stockChart'}
                     options={options}
+                // containerProps={{}
 
                 />
             </div>
         )
     else if (isLoading)
-        return <div className='w-full h-32 flex flex-col gap-2 items-center justify-center'><Spinner /></div>
+        return <div className='w-full  flex flex-col gap-2 items-center justify-center h-[400px] bg-gray-50 rounded-lg animate-pulse'><Spinner className='size-5' /></div>
     return <></>
 }
