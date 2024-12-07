@@ -17,3 +17,11 @@ export const currencies  = ['British Pounds' , 'US Dollar' , 'Euro']
 export type WeightType = 'grams' | 'ounces' | 'kilograms'
 export const weights = ['grams' , 'ounces' , 'kilograms']
 
+
+///Commodity Symbols 
+export const commoditySymbols :Array<{commodity:CommodityType , symbol:string}> = [
+    {commodity :'gold' , symbol:'Au'},
+    {commodity :'palladium' , symbol:'Pd'},
+    {commodity :'platinum' , symbol:'Pt'},
+    {commodity :'silver' , symbol:'Ag'},
+] 
