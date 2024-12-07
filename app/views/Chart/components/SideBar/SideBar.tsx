@@ -1,6 +1,8 @@
 'use client'
 import { Spinner } from '@components'
-import { commoditySymbols, CommodityType, currencySymbols } from '@staticData'
+import { commoditySymbols, CommodityType, currencySymbols, periods } from '@staticData'
+import { uppercaseFirstLetter } from '@utils'
+import clsx from 'clsx'
 import { useChartData } from 'modules/price'
 import React from 'react'
 import { useChartFilter } from 'views/Chart/hooks'
@@ -23,17 +25,26 @@ const generateStyle = (commodity?: CommodityType): { color: string, background: 
 
 export const SideBar = () => {
 
-    const { commodity  , currency} = useChartFilter()
+    const { commodity, currency, period } = useChartFilter()
 
 
     const { data, isLoading } = useChartData()
 
-    const currentCurrency = currencySymbols.find(i=>i.currency==currency)
+    const currentCurrency = currencySymbols.find(i => i.currency == currency)
 
 
-    const lastPrice = data?.data?.findLast(i=>i)
+    const lastPrice = data?.data?.findLast(i => i)
 
-    console.log({lastPrice})
+    const firstPrice = data?.data?.[0]
+
+    const changeColorClassName = () => (lastPrice?.value ?? 0) - (firstPrice?.value ?? 0) < 0 ? 'text-error' : 'text-success'
+
+    const changeBgColorClassName = () => (lastPrice?.value ?? 0) - (firstPrice?.value ?? 0) < 0 ? 'bg-error' : 'bg-success'
+
+    const changePercent = ((((lastPrice?.value ?? 0) - (firstPrice?.value ?? 0)) / (firstPrice?.value ?? 0)) * 100).toFixed(2)
+    const changePrice = ((lastPrice?.value ?? 0) - (firstPrice?.value ?? 0)).toFixed(2)
+
+    console.log({ lastPrice, firstPrice })
 
     return (
         <div className='grid grid-cols-3 gap-4'>
@@ -41,14 +52,28 @@ export const SideBar = () => {
                 {commoditySymbols.find(i => i.commodity == commodity)?.symbol}
             </div>
 
-            <div className='flex flex-col gap-2  col-span-2 p-3 border border-border-color'>
+            <div className='flex flex-col gap-2.5  col-span-2 p-3 border border-border-color'>
                 <span className='text-gray-500 text-sm'>Current Price</span>
                 {isLoading
-                    ? <div className='w-full h-8 rounded-lg animate-pulse bg-gray-200 flex flex-row justify-center items-center'><Spinner className='w-4 h-4'/></div>
+                    ? <div className='w-full h-8  animate-pulse bg-gray-200 flex flex-row justify-center items-center'><Spinner className='w-4 h-4' /></div>
                     : <span className='text-2xl text-black-1'>{currentCurrency?.symbol}&nbsp;{lastPrice?.value.toLocaleString('en')}</span>}
 
             </div>
 
+            {data?.data
+                ? <div className='col-span-3 flex flex-col gap-2.5 border border-border-color p-3'>
+                    <span className='text-gray-500 text-sm'>{uppercaseFirstLetter(period ?? '')} Change</span>
+
+                    <div className='flex flex-row gap-2.5 items-center'>
+                        <div className={clsx(changeBgColorClassName(), 'rounded-3xl px-2 py-1 text-white text-sm font-bold')}>{changePercent}%</div>
+                        <span className={clsx(changeColorClassName())}>{currentCurrency?.symbol}&nbsp;{changePrice}</span>
+                    </div>
+
+
+
+                </div> 
+                : <div className='h-20 col-span-3 animate-pulse bg-gray-200 flex flex-row justify-center items-center'><Spinner className='w-4 h-4'/></div>
+            }
         </div>
     )
 }

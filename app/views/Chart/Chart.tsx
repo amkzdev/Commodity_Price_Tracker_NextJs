@@ -18,7 +18,7 @@ export const Chart = ({ period }: { period: string, currency: string, commodity:
       </div>
 
       <div className='col-span-5 lg:col-span-4 mt-4'>
-        {/* <DataChart /> */}
+        <DataChart />
       </div>
 
       <div className='col-span-5 lg:col-span-1'>
