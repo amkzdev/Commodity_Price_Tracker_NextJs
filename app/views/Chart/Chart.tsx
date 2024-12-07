@@ -1,13 +1,17 @@
 'use client'
 import { periods } from '@staticData'
 import React from 'react'
-import { DataChart, Filters, SideBar } from './components'
+import { ChartTitle, DataChart, Filters, SideBar } from './components'
 import { useChartData } from 'modules/price'
 
 export const Chart = ({ period }: { period: string, currency: string, commodity: string, weight: string }) => {
 
   return (
-    <div className='grid grid-cols-5 gap-4 w-full py-8'>
+    <div className='grid grid-cols-5 gap-6 w-full py-8'>
+
+      <div className='col-span-5'>
+        <ChartTitle />
+      </div>
 
       <div className='col-span-5'>
         <Filters />
