@@ -25,6 +25,7 @@
       "@types": ["types/index.ts"],
       "@hooks": ["types/index.ts"],
       "@staticData": ["staticData/index.ts"],
+      "@utils": ["utils/index.ts"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
