@@ -4,8 +4,8 @@ import React from 'react'
 export const Navbar = () => {
   return (
     <nav className='text-sm flex flex-row gap-4 items-center '>
-        {/* <Link href={'/price/gold'} className='text-white hover:text-yellow-400 transition-all duration-200' title='Go To Gold Chart'>Gold Chart</Link>
-        <Link href={'/price/gold#calc'} className='text-white hover:text-yellow-400 transition-all duration-200' title='Go To Calculator'>Calculator</Link> */}
+         <Link href={'/price/gold'} className='text-white hover:text-yellow-400 transition-all duration-200' title='Go To Gold Chart'>Gold Chart</Link>
+        {/*<Link href={'/price/gold#calc'} className='text-white hover:text-yellow-400 transition-all duration-200' title='Go To Calculator'>Calculator</Link> */}
     </nav>
   )
 }

@@ -1,5 +1,5 @@
 import { api } from "_api";
-import { useCustomMutation } from "hooks";
+import { useAuth, useCustomMutation } from "hooks";
 import { authEndpoints, AuthEndpointsType } from "./endpoints";
 import { useSignUp } from "views/Login/components/hooks";
 import { setCookie } from "cookies-next";
@@ -45,6 +45,9 @@ export const useMutateLogin = () => {
 
     const router = useRouter()
 
+    const { dispatch } = useAuth()
+
+
 
     return useCustomMutation<AuthEndpointsType['LOGIN']>({
         mutationFn: (data) => api.post(authEndpoints.LOGIN, data),
@@ -54,6 +57,7 @@ export const useMutateLogin = () => {
         },
         onSuccess: ({ data: { id_token } }) => {
             setCookie('access_token', id_token, { maxAge: 60 * 60 * 24 })
+            dispatch({ isLoggedIn: true })
             router.push('/dashboard')
             alert('You Have Successfully Logged in')
 

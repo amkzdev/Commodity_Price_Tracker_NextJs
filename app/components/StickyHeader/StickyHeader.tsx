@@ -1,9 +1,13 @@
+'use client'
 import { UserIcon } from '@heroicons/react/16/solid'
 import Link from 'next/link'
 import React from 'react'
 import { Navbar } from './components/Navbar/Navbar'
+import { useAuth } from 'hooks'
 
 export const StickyHeader = () => {
+
+  const { isLoggedIn } = useAuth()
   return (
     <header className='bg-primary w-full  sticky top-0 drop-shadow shadow'>
       <div className='flex flex-row py-3 justify-between  container min-h-12 items-center mx-auto'>
@@ -12,10 +16,16 @@ export const StickyHeader = () => {
           <Navbar />
         </div>
 
-        <Link href={'/login'} className='flex flex-row gap-2 text-white'>
+        {!isLoggedIn
+          ? <Link href={'/login'} className='flex flex-row gap-2 text-white'>
+            <UserIcon className='size-5 ' />
+            <span>Login / Register</span>
+          </Link> 
+          :<Link href={'/dashboard'} className='flex flex-row gap-2 text-white'>
           <UserIcon className='size-5 ' />
-          <span>Login / Register</span>
-        </Link>
+          <span>Dashboard</span>
+        </Link> 
+        }
       </div>
     </header>
   )
