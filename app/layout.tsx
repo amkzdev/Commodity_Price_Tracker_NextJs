@@ -10,7 +10,8 @@ export const metadata: Metadata = {
 }
 
 const mainFont = Lato({
-  weight: ['100', '300', '400', '700', '900']
+  weight: ['100', '300', '400', '700', '900'],
+  subsets:['latin','latin-ext']
 })
 
 export default function RootLayout ({
