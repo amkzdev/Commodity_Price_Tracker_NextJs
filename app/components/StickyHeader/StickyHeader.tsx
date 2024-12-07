@@ -9,8 +9,8 @@ export const StickyHeader = () => {
 
   const { isLoggedIn } = useAuth()
   return (
-    <header className='bg-primary w-full  sticky top-0 drop-shadow shadow'>
-      <div className='flex flex-row py-3 justify-between  container min-h-12 items-center mx-auto'>
+    <header className='bg-primary w-full  sticky top-0 drop-shadow shadow z-40'>
+      <div className='flex flex-row py-3 px-4 lg:px-0 justify-between  container min-h-12 items-center mx-auto'>
         <div className='flex flex-row gap-12 items-center'>
           <span className='text-yellow-500 font-bold text-lg'>Gold App</span>
           <Navbar />

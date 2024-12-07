@@ -23,7 +23,7 @@ export default function RootLayout ({
       <body className={`${mainFont.className} `}>
         <ClientLayout>
           <StickyHeader />
-          <section className='container mx-auto flex py-2 px-4'>
+          <section className='container mx-auto flex py-2 px-4 pb-6 lg:pb-2'>
             {children}
           </section>
         </ClientLayout>
