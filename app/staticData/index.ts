@@ -25,3 +25,10 @@ export const commoditySymbols :Array<{commodity:CommodityType , symbol:string}> 
     {commodity :'platinum' , symbol:'Pt'},
     {commodity :'silver' , symbol:'Ag'},
 ] 
+
+///CurrencySymbols
+export const currencySymbols:Array<{currency:CurrencyType , symbol:string}> =[
+    {currency:'British Pounds' , symbol:'£'},
+    {currency:'Euro' , symbol:'€'},
+    {currency:'US Dollar' , symbol:'$'},
+]
