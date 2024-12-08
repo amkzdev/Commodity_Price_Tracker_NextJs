@@ -17,8 +17,8 @@ export const Select = <VT,>({ icon: Icon, items, onSelectAction, value, title }:
                 <span className='font-semibold text-base'>{title}</span>
             </div>}
 
-            <div className=' rounded border border-black flex flex-row gap-2 items-center justify-between relative hover:-translate-y-0.5 hover:shadow transition-all duration-300 cursor-pointer' onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
-                <span className='flex-1 flex px-2 py-1 hover:bg-black-1  hover:text-white justify-between items-center '>
+            <div className=' rounded border border-black flex flex-row gap-2 items-center justify-between relative hover:-translate-y-0.5 hover:shadow transition-all duration-300 cursor-pointer' onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)} >
+                <span className='flex-1 flex px-2 py-1 hover:bg-black-1  hover:text-white justify-between items-center ' onClick={()=>setIsOpen(true)}>
                     {selectedItem?.title}
                     <ChevronDownIcon className='size-2  ' />
                 </span>
