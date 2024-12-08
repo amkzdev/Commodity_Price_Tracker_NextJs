@@ -22,7 +22,7 @@ export const Select = <VT,>({ icon: Icon, items, onSelectAction, value, title }:
                     {selectedItem?.title}
                     <ChevronDownIcon className='size-2  ' />
                 </span>
-                <div className={clsx('absolute left-0 top-full  transition-all shadow rounded border w-full z-20', isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none')}>
+                <div className={clsx('absolute left-0 top-full  transition-all shadow rounded border w-full z-20 bg-white', isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none')}>
                     {items.map(item => <div
                         onClick={() => { onSelectAction(item.value); setIsOpen(false) }}
                         className={clsx('p-2 hover:bg-gray-50 hover:text-black cursor-pointer',
