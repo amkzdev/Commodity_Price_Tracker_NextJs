@@ -50,15 +50,17 @@ export const createMeasurment = (m?: CommodityType): CommodityType => {
 
 export const useChartData = () => {
 
-    const { commodity, period } = useChartFilter()
+    const { commodity, period, ...rest } = useChartFilter()
 
-    return useCustomQuery<PriceEndpointsType['GET_PRICES'], [string, CommodityType | undefined, PeriodType | undefined]>({
-        queryFn: ({ queryKey }) => {
+    return {
+        commodity, period, ...rest, ...useCustomQuery<PriceEndpointsType['GET_PRICES'], [string, CommodityType | undefined, PeriodType | undefined]>({
+            queryFn: ({ queryKey }) => {
 
-            return api.get(priceEndpoints.GET_PRICES, { params: { measurement: createMeasurment(queryKey[1]), from: createFromParam(queryKey[2]) , unit:'GRAM' } })
-        },
-        queryKey: ['GET-PRICES', commodity, period],
-        refetchInterval:1000 * 60,
-    })
+                return api.get(priceEndpoints.GET_PRICES, { params: { measurement: createMeasurment(queryKey[1]), from: createFromParam(queryKey[2]), unit: 'GRAM' } })
+            },
+            queryKey: ['GET-PRICES', commodity, period],
+            refetchInterval: 1000 * 60,
+        })
+    }
 
 }
