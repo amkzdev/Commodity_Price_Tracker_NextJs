@@ -14,6 +14,7 @@ export const ButtonFilter = <T,>({ items, icon: Icon, title, onChange, value }: 
         {items.map(item => {
           const isActive = value == item.value
           return <div
+            key={item.value?.toString()}
             className={clsx(
               'flex-1 whitespace-nowrap text-center',
               isActive
