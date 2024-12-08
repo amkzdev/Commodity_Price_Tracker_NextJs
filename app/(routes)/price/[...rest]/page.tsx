@@ -4,7 +4,7 @@ import { Chart } from 'views/Chart/Chart'
 
 
 export const metadata:Metadata ={
-    title:'price charts | Gold App'
+    title:'Price Chart | Gold App'
 }
 export default function page() {
   return (
