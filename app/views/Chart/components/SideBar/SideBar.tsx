@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { Button, Spinner } from '@components'
-import { ArrowUpIcon, BellIcon, UserIcon } from '@heroicons/react/24/outline'
+import { ArrowDownIcon, ArrowUpIcon, BellIcon, UserIcon } from '@heroicons/react/24/outline'
 import { commoditySymbols, CommodityType, currencySymbols, periods } from '@staticData'
 import { uppercaseFirstLetter } from '@utils'
 import clsx from 'clsx'
@@ -47,10 +47,9 @@ export const SideBar = () => {
 
 
 
-            {/* <div className='col-span-3 flex flex-col gap-2 items-stretch'>
-                <Button fillFlex className='font-bold' leftIcon={BellIcon}>Create Price Alerts</Button>
-                <Button fillFlex className='font-bold' variant='suceess' leftIcon={UserIcon}>Sign In or Register Now</Button>
-            </div> */}
+             <div className='col-span-3 flex flex-col gap-2 items-stretch'>
+                <div className='h-9 w-full bg-gray-200 animate-pulse'></div>
+            </div>
 
         </div>
 
@@ -115,7 +114,7 @@ export const SideBar = () => {
                         </div>
 
                         <div className='flex flex-row gap-2 items-center'>
-                            <ArrowUpIcon className='text-error size-3' />
+                            <ArrowDownIcon className='text-error size-3' />
                             <span className='text-gray-500 text-sm'>{uppercaseFirstLetter(period)} low</span>
                             <span className={'font-semibold text-black-1'}>{currentCurrency?.symbol}&nbsp;{lowestPrice}</span>
                         </div>
@@ -128,8 +127,8 @@ export const SideBar = () => {
 
 
                 <div className='col-span-3 flex flex-col gap-2 items-stretch'>
-                    <Button fillFlex className='font-bold' leftIcon={BellIcon}>Create Price Alerts</Button>
-                    <Button fillFlex className='font-bold' variant='suceess' leftIcon={UserIcon}>Sign In or Register Now</Button>
+                    {/* <Button fillFlex className='font-bold' leftIcon={BellIcon}>Create Price Alerts</Button> */}
+                   {isLoading ?  <div className='h-9 w-full bg-gray-200 animate-pulse '></div> : <Button fillFlex className='font-bold' variant='suceess' leftIcon={UserIcon}>Sign In or Register Now</Button>}
                 </div>
 
             </div>
