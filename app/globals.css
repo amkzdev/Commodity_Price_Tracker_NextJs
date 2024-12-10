@@ -7,3 +7,7 @@ body {
   height: 100%;
   width: 100%;
 }
+
+.highcharts-credits {
+  display: none !important; /*Hide Highchart  Copyright Word*/
+}
