@@ -4,7 +4,7 @@ import React from 'react'
 import { ChartTitle, DataChart, Filters, SideBar } from './components'
 import { useChartData } from 'modules/price'
 
-export const Chart = ({ period }: { period: string, currency: string, commodity: string, weight: string }) => {
+export const Chart = ({ period }: { period?: string, currency?: string, commodity?: string, weight?: string }) => {
 
   return (
     <div className='grid grid-cols-5 gap-6 w-full py-8'>
@@ -13,17 +13,17 @@ export const Chart = ({ period }: { period: string, currency: string, commodity:
         <ChartTitle />
       </div>
 
-      <div className='col-span-5'>
+      <div className='col-span-5 z-10'>
         <Filters />
       </div>
 
-      <div className='col-span-5 lg:col-span-4 mt-4'>
+        <div className='col-span-5 lg:col-span-4 mt -0 -my-8 lg:my-0 '>
         <DataChart />
-      </div>
+      </div> 
 
       <div className='col-span-5 lg:col-span-1'>
         <SideBar />
-      </div>
+      </div> 
 
 
     </div>

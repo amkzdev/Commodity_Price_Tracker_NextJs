@@ -78,7 +78,7 @@ export const DataChart = () => {
         },
 
         tooltip: {
-            crosshairs: true,
+            // crosshairs: true,
             pointFormat: ` ${commodity?.substring(0, 1).toLocaleUpperCase().concat(commodity.substring(1))} Price  <br/> <b>{point.y}${generateYLabel(currency)}</b> `
             // pointFormat: '{series.name}  <b>{point.y:,.0f}</b><br/>' +
             //     ' {point.x}'
@@ -94,11 +94,14 @@ export const DataChart = () => {
             labels: {
                 offset: 10
             },
-            crosshair: true
+            crosshair: {
+                width: 1,
+                color: '#cccccc'
+            }
 
         },
         yAxis: {
-            labels: { align: 'right', title: undefined, format: generateYLabel(currency), style: { fontSize: '10px', color: '#212529' } },
+            labels: { align: 'right', title: undefined, format: generateYLabel(currency), style: { fontSize: '10px', color: '#333333' }, distance:5 },
             opposite: true,
             align: 'right',
             offset: 10,
@@ -106,7 +109,13 @@ export const DataChart = () => {
             allowOverlap: true,
             formatter: (f: any, t: string) => `${t}$`,
             title: false,
-            // crosshair:true
+            minorGridLineWidth: 1,
+            minorTickInterval: 'auto',
+            minorTickColor: 'transparent',
+            // minorTickWidth: 1,
+            // minorTickLength: 10,
+            minorTickPosition: 'outside',
+
             // label: { format: generateYLabel(currency) }
         },
         series: [{
@@ -122,7 +131,7 @@ export const DataChart = () => {
 
     if (data )
         return (
-            <div className='w-full relative' style={{ height: '100px' }}>
+            <div className='w-full relative [&>.highcharts-credits]:!hidden' style={{ height: '100px' }}>
 
                 <HighchartsReact
                     highcharts={Highcharts}
