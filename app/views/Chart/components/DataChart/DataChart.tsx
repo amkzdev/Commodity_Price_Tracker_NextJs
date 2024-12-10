@@ -38,12 +38,68 @@ const generateYLabel = (currency?: CurrencyType) => {
 }
 
 
+const generateTickInterval = (period?: PeriodType): Array<number> | undefined => {
+
+    if (period == 'live') {
+        //Each 1 Minute Until 10 Minute Ago
+
+        const nowTime = Date.now()
+
+        // return undefined
+        return Array.from(new Array(10)).map((i, index) => nowTime - (60 * 1000 * index))
+    }
+
+    else if (period == 'today') {
+        const nowTime = Date.now()
+
+
+        // return [1733864513099]
+
+        return Array.from(new Array(9)).map((item, index) => nowTime - (1000 * 60 * (3 * 60) * index))
+    }
+
+    return [0.2, 3]
+
+}
+
+
+const generateDateFormat = (period?: PeriodType) => {
+
+    if (period == 'live' || period == 'today')
+        return ({
+            second: '%H:%M:%S',
+            minute: '%H:%M',
+            hour: '%H:%M',
+            day: '%b. %e',
+            week: '%b. %e',
+            month: '%b. %y',
+            year: '%Y'
+        })
+
+    else return ({
+        second: ' ',
+        minute: ' ',
+        hour: ' ',
+        day: '%e/%o/%Y',
+        week: '%b. %e',
+        month: '%b. %y',
+        year: '%Y'
+    })
+}
+
+
 export const DataChart = () => {
 
     const { data, isLoading } = useChartData()
 
 
     const { commodity, period, currency } = useChartFilter()
+
+    // console.log(data?.data.filter((i,index)=>index % 1000==0).map(i=>(new Date(i.time)).getTime()))
+
+    console.log(generateTickInterval(period))
+
+    console.log(data?.data.map(i => ({ x: (new Date(i.time)).getTime(), y: i.value })))
 
     const options = {
         style: {
@@ -78,30 +134,39 @@ export const DataChart = () => {
         },
 
         tooltip: {
-            // crosshairs: true,
             pointFormat: ` ${commodity?.substring(0, 1).toLocaleUpperCase().concat(commodity.substring(1))} Price  <br/> <b>{point.y}${generateYLabel(currency)}</b> `
             // pointFormat: '{series.name}  <b>{point.y:,.0f}</b><br/>' +
             //     ' {point.x}'
         },
         xAxis: {
-            categories: data?.data.filter((i, index) => index % 1000 == 0).map((i, index, arr) => renderLabel(i.time, period)),
+            // categories: data?.data.map((i, index, arr) => renderLabel(i.time, period)),
+            // tickPositions:[1733862801091],
+            // tickPositions: generateTickInterval(period),
             gridLineWidth: 1,
-            tickAmount: 8,
+            // tickAmount:3,
             allowTicks: true,
-            breakSize: 2000,
+            // breakSize: 2000,
             gridLineColor: 'rgba(0, 0, 0, 0.1)',
-            tickInterval: 7,
-            labels: {
-                offset: 10
-            },
+            labels: { style: { color: '#333333', fontSize: 10 } },
+            // tickInterval: 7,
             crosshair: {
                 width: 1,
                 color: '#cccccc'
-            }
+            },
+            type: 'datetime', // Set the type to 'datetime'
+            dateTimeLabelFormats: generateDateFormat(period),
+            tickLength: 0,
+            lineColor: 'transparent',
+            // plotLines: generateTickInterval(period)?.map(i=>({
+            //     color: '#e2e2e2',
+            //     width: 0.5,
+            //     value: i
+            // }))
+
 
         },
         yAxis: {
-            labels: { align: 'right', title: undefined, format: generateYLabel(currency), style: { fontSize: '10px', color: '#333333' }, distance:5 },
+            labels: { align: 'right', title: undefined, format: generateYLabel(currency), style: { fontSize: '10px', color: '#333333' }, distance: 5 },
             opposite: true,
             align: 'right',
             offset: 10,
@@ -121,15 +186,18 @@ export const DataChart = () => {
         series: [{
             name: `${commodity?.substring(0, 1).toLocaleUpperCase().concat(commodity.substring(1))} Price`,
             // data: data?.data.map(i => ({y:i.value  , x:i.time.split('T')[0]}))
-            data: data?.data.filter((i, index) => index % 1000 == 0).map(i => i.value),
+            data: data?.data.map(i =>[i.time , i.value]),
+            // data: data?.data.map(i =>i.value),
             color: generateChartColor(commodity),
+            // pointStart: '2024-12-10',
+            // pointInterval: 36e5 // one day
 
         }]
     }
 
     // console.log(data?.data.filter((i, index) => index % 1000 == 0).map(i => i.value))
 
-    if (data )
+    if (data)
         return (
             <div className='w-full relative [&>.highcharts-credits]:!hidden' style={{ height: '100px' }}>
 

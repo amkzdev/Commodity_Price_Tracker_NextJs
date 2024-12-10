@@ -25,7 +25,7 @@ const createFromParam = (period?: PeriodType): string => {
         date.setMonth(date.getMonth() - 6)
     }
     else if (period == 'live') {
-        date.setMinutes(date.getMinutes() - 20)
+        date.setMinutes(date.getMinutes() - 10)
     }
 
     else if (period == 'week') {
