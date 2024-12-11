@@ -1,10 +1,17 @@
 'use client'
-import { periods } from '@staticData'
-import React from 'react'
+import { CommodityType, periods, PeriodType } from '@staticData'
+import React, { useEffect } from 'react'
 import { ChartTitle, DataChart, Filters, SideBar } from './components'
 import { useChartData } from 'modules/price'
+import { useChartFilter } from './hooks'
 
-export const Chart = ({ period }: { period?: string, currency?: string, commodity?: string, weight?: string }) => {
+export const Chart = ({ period, commodity }: { period?: PeriodType, commodity?: CommodityType }) => {
+
+  const { dispatch } = useChartFilter()
+
+  useEffect(() => {
+    dispatch({ period, commodity })
+  }, [])
 
   return (
     <div className='grid grid-cols-5 gap-6 w-full py-8'>
@@ -17,13 +24,13 @@ export const Chart = ({ period }: { period?: string, currency?: string, commodit
         <Filters />
       </div>
 
-        <div className='col-span-5 lg:col-span-4 mt -0 -my-8 lg:my-0 '>
+      <div className='col-span-5 lg:col-span-4 mt -0 -my-8 lg:my-0 '>
         <DataChart />
-      </div> 
+      </div>
 
       <div className='col-span-5 lg:col-span-1'>
         <SideBar />
-      </div> 
+      </div>
 
 
     </div>

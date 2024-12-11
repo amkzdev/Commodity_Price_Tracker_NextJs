@@ -33,3 +33,13 @@ export interface ErrorType {
     path: string
 
 }
+
+
+export type pageProps<PT = {}, SP = {}> = {
+    params: {
+        [Property in keyof PT]: PT[Property];
+    },
+    searchParams: {
+        [Property in keyof SP]: SP[Property];
+    }
+}

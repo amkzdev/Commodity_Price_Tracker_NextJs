@@ -55,6 +55,7 @@ export const useChartData = () => {
     return {
         commodity, period, ...rest, ...useCustomQuery<PriceEndpointsType['GET_PRICES'], [string, CommodityType | undefined, PeriodType | undefined]>({
             queryFn: ({ queryKey }) => {
+                if(!queryKey[1]) return Promise.reject()
 
                 return api.get(priceEndpoints.GET_PRICES, { params: { measurement: createMeasurment(queryKey[1]), from: createFromParam(queryKey[2]), unit: 'GRAM' } })
             },

@@ -14,10 +14,10 @@ interface StoreType extends FilterType {
 }
 
 export const useChartFilter = create<StoreType>((set) => ({
-    commodity:'gold',
+    // commodity:'gold',
     weight:'ounces',
     currency:'British Pounds',
-    period:'today',
+    // period:'today',
     dispatch: (newData) => set((state) => ({ ...state , ...newData })),
 }))
 
