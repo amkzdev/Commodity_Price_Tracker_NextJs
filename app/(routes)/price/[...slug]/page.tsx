@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import { Metadata } from 'next'
 import { Chart } from 'views/Chart/Chart'
 
-export async function generateMetadata({ params }: pageProps<Promise<{ slug: [CommodityType, PeriodType] }>>): Promise<Metadata> {
+export async function generateMetadata({ params }: pageProps<Promise<{ slug: [CommodityType, PeriodType] }>,Promise<any>>): Promise<Metadata> {
 
 
   const { slug } = await params
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: pageProps<Promise<{ slug: [Co
 }
 
 
-export default async function page({ params }: pageProps<Promise<{ slug: [CommodityType, PeriodType] }>>) {
+export default async function page({ params }: pageProps<Promise<{ slug: [CommodityType, PeriodType] }>,Promise<any>>) {
 
   const {slug} = await params 
 
