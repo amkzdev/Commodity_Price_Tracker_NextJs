@@ -32,7 +32,7 @@ export const Chart = ({ period:initialPeriod, commodity:initialCommodity }: { pe
         <Filters />
       </div>
 
-      <div className='col-span-5 lg:col-span-4 mt -0 -my-8 lg:my-0 '>
+      <div className='col-span-5 lg:col-span-4 mt -0  '>
         <DataChart />
       </div>
 
