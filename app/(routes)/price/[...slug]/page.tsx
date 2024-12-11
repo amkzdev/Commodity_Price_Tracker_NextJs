@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: pageProps<Promise<{ slug: [Co
   const { slug } = await params
   const commodity: CommodityType = commodities.indexOf(slug[0]) != -1 ? slug[0] : 'gold'
 
-  const period: PeriodType = periods.indexOf(slug[1].replace('%20','')) != -1 ? slug[1].replace('%20',' ') as PeriodType : 'today'
+  const period: PeriodType = periods.indexOf(slug[1]?.replace('%20','')) != -1 ? slug[1]?.replace('%20',' ') as PeriodType : 'today'
 
   return ({
     title: clsx(
@@ -32,7 +32,7 @@ export default async function page({ params }: pageProps<Promise<{ slug: [Commod
 
   const commodity: CommodityType = commodities.indexOf(slug[0]) != -1 ? slug[0] : 'gold'
 
-  const period: PeriodType  = periods.indexOf(slug[1].replace('%20',' ')) != -1 ? slug[1].replace('%20',' ') as PeriodType : 'today'
+  const period: PeriodType  = periods.indexOf(slug[1]?.replace('%20',' ')) != -1 ? slug[1]?.replace('%20',' ') as PeriodType : 'today'
 
   return (
     <Chart commodity={commodity} period={period} />
