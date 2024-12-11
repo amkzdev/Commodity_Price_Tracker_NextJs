@@ -20,7 +20,7 @@ const generateChartColor = (commodity?: CommodityType) => {
 
     switch (commodity) {
         case 'gold': return '#eaddc6'
-        case 'palladium': return '#f7f7f7'
+        case 'palladium': return '#bfbfbf'
         case 'silver': return '#aaaaaa'
         case 'platinum': return '#bfbfbf'
         default: return '#eaddc6'

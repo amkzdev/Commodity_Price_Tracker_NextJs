@@ -4,14 +4,22 @@ import React, { useEffect } from 'react'
 import { ChartTitle, DataChart, Filters, SideBar } from './components'
 import { useChartData } from 'modules/price'
 import { useChartFilter } from './hooks'
+import { useRouter } from 'next/navigation'
 
-export const Chart = ({ period, commodity }: { period?: PeriodType, commodity?: CommodityType }) => {
+export const Chart = ({ period:initialPeriod, commodity:initialCommodity }: { period?: PeriodType, commodity?: CommodityType }) => {
 
-  const { dispatch } = useChartFilter()
+  const { dispatch , period, commodity } = useChartFilter()
+
+  const router = useRouter()
 
   useEffect(() => {
-    dispatch({ period, commodity })
+    dispatch({ period:initialPeriod, commodity:initialCommodity })
   }, [])
+
+
+  useEffect(()=>{
+    router.replace(`/price/${commodity}/${period}`)
+  },[period ,commodity])
 
   return (
     <div className='grid grid-cols-5 gap-6 w-full py-8'>

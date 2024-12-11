@@ -6,8 +6,10 @@ import clsx from 'clsx'
 import { Metadata } from 'next'
 import { Chart } from 'views/Chart/Chart'
 
-export async function generateMetadata ({params:{slug}} :pageProps<{ slug: [ CommodityType , PeriodType]}>): Promise<Metadata> {
+export async function generateMetadata ({params} :pageProps<{ slug: [ CommodityType , PeriodType]}>): Promise<Metadata> {
 
+
+  const slug =(await params).slug
   const commodity:CommodityType = commodities.indexOf(slug[0])!=-1 ? slug[0] : 'gold'
 
   const period:PeriodType=periods.indexOf(slug[1])!=-1 ?  slug[1] : 'today'
