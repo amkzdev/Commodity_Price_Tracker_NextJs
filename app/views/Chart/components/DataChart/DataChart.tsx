@@ -95,11 +95,9 @@ export const DataChart = () => {
 
     const { commodity, period, currency } = useChartFilter()
 
-    // console.log(data?.data.filter((i,index)=>index % 1000==0).map(i=>(new Date(i.time)).getTime()))
+    const chartMin = data?.data ? data?.data?.map(i=>i.value).sort()?.[0] * 0.997: undefined //Min
 
-    console.log(generateTickInterval(period))
-
-    console.log(data?.data.map(i => ({ x: (new Date(i.time)).getTime(), y: i.value })))
+    const chartMax = data?.data ? data?.data?.map(i=>i.value).sort().toReversed()?.[0] * 1.003: undefined //Max
 
     const options = {
         style: {
@@ -180,6 +178,8 @@ export const DataChart = () => {
             // minorTickWidth: 1,
             // minorTickLength: 10,
             minorTickPosition: 'outside',
+            min:chartMin ,
+            max:chartMax
 
             // label: { format: generateYLabel(currency) }
         },
